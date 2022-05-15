@@ -1,5 +1,8 @@
 
 source("./beads.to.euc.R")
+require("RColorBrewer")
+require("pheatmap")
+
 options(echo=T)
 args <- commandArgs(trailingOnly = TRUE)
 beads <- args[1]
@@ -11,7 +14,7 @@ euclidian_distances <-as.matrix(dist(euclidian_extraction[-1], method = "euclidi
 col_groups <- substr(colnames(euclidian_distances), 1, 1)
 table(col_groups)
 mat_col <- data.frame(group = col_groups)
-rownames(mat_col) <- colnames(nba)
+rownames(mat_col) <- colnames(euclidian_distances)
 mat_colors <- list(group = brewer.pal(3, "Set1"))
 names(mat_colors$group) <- unique(col_groups)
 pdf(euclidian_distances.pdf,width=8,height=8)
