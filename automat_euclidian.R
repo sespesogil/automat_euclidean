@@ -17,7 +17,7 @@ mat_col <- data.frame(group = col_groups)
 rownames(mat_col) <- colnames(euclidian_distances)
 mat_colors <- list(group = brewer.pal(3, "Set1"))
 names(mat_colors$group) <- unique(col_groups)
-pdf(euclidian_distances.pdf,width=8,height=8)
+pdf("euclidian_distances.pdf",width=8,height=8)
 pheatmap(
   mat               = euclidian_distances,
   color             = rainbow(1000),
