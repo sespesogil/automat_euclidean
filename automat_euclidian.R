@@ -2,6 +2,7 @@
 source("./beads.to.euc.R")
 require("RColorBrewer")
 require("pheatmap")
+require("reshape2")
 
 options(echo=T)
 args <- commandArgs(trailingOnly = TRUE)
@@ -11,6 +12,8 @@ ROI <- args[2]
 euclidian_extraction <- beads.to.euc(beads,ROI)
 rownames(euclidian_extraction) <- euclidian_extraction$bead_ID
 euclidian_distances <-as.matrix(dist(euclidian_extraction[-1], method = "euclidian", diag = TRUE, upper = TRUE))
+PairWiseTable<- melt(euclidian_distances)
+write.table(PairWiseTable, "EucledeanPairWiseTable.txt", sep="\t")
 col_groups <- substr(colnames(euclidian_distances), 1, 1)
 table(col_groups)
 mat_col <- data.frame(group = col_groups)
