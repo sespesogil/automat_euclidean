@@ -3,7 +3,6 @@ source("./beads.to.euc.R")
 require("RColorBrewer")
 require("pheatmap")
 require("reshape2")
-require("reshape2")
 require("ggbiplot")
 require("ggplot2")
 
