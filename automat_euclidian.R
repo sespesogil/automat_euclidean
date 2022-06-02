@@ -3,6 +3,9 @@ source("./beads.to.euc.R")
 require("RColorBrewer")
 require("pheatmap")
 require("reshape2")
+require("reshape2")
+require("ggbiplot")
+require("ggplot2")
 
 options(echo=T)
 args <- commandArgs(trailingOnly = TRUE)
@@ -12,7 +15,34 @@ ROI <- args[2]
 euclidian_extraction <- beads.to.euc(beads,ROI)
 rownames(euclidian_extraction) <- euclidian_extraction$bead_ID
 euclidian_distances <-as.matrix(dist(euclidian_extraction[-1], method = "euclidian", diag = TRUE, upper = TRUE))
+
+toPCA <- prcomp(euclidian_distances,
+             center = TRUE,
+            scale. = TRUE)
+g <- ggbiplot(toPCA, ellipse=FALSE, circle = FALSE, var.axes=F)
+
+pdf("PCAeuclidian_distances.pdf",width=8,height=8)
+g
+dev.off()
+
+
+
 PairWiseTable<- melt(euclidian_distances)
+
+close<-subset(PairWiseTable, value < 10)
+close$group<-"1_Close"
+medium1<-subset(PairWiseTable, value >= 10 )
+medium2<-subset(medium1, value < 30 )
+medium2$group<-"2_Mid"
+far<-subset(PairWiseTable, value >= 30)
+far$group<-"3_Far"
+ToPlot<-rbind(close,
+              medium2,
+              far)
+pdf("BoxPlotDistances.pdf",width=8,height=8)
+ggplot(ToPlot, aes(x=group, y=value, fill=group)) + geom_boxplot()
+dev.off()
+
 write.table(PairWiseTable, "EucledeanPairWiseTable.txt", sep="\t", quote=FALSE, row.names=FALSE)
 write.table(euclidian_distances, "EucledeanPairWiseMatrix.txt", sep="\t", quote=FALSE, row.names=TRUE)
 col_groups <- substr(colnames(euclidian_distances), 1, 1)
