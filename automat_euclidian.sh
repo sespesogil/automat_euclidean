@@ -17,3 +17,6 @@ bedtools intersect -a bead.bedfile -b $2 -wa | awk -F"\t" '{print $4}' | sort | 
 
 Rscript automat_euclidian.R bead.ids ROI
 
+echo "Calculating distance to the centroid.."
+awk '{ sum = ($2 ** 2) + ($3 ** 2) + ($4 ** 2); avg = sum ** 0.5 ; print $1"\t"$2"\t"$3"\t"$4, avg }' ToCentroid.txt > EuclideanCentroid.txt
+
