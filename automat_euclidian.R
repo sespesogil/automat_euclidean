@@ -12,6 +12,7 @@ beads <- args[1]
 ROI <- args[2]
 
 euclidian_extraction <- beads.to.euc(beads,ROI)
+write.table(euclidian_extraction, "ToCentroid.txt", sep="\t", quote=FALSE, row.names=FALSE)
 rownames(euclidian_extraction) <- euclidian_extraction$bead_ID
 euclidian_distances <-as.matrix(dist(euclidian_extraction[-1], method = "euclidian", diag = TRUE, upper = TRUE))
 
