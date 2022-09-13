@@ -95,9 +95,6 @@ SummaryDF<-cbind(Clusters1, Clusters2)
 
 pheatmap(t(SummaryDF), fontsize = 7)
 
-# plot dendogram plots:
-# pdf("DendogramsPlot2.pdf",width=15,height=8)
-
 p3 = grid.grabExpr(draw(pheatmap(t(SummaryDF), fontsize = 7)))
 
 p1<-plot_grid(HistogramHeigthPlot1, HistogramHeigthPlot2, 
