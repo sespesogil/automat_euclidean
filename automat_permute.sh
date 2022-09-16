@@ -18,7 +18,7 @@ rm beads
 echo "Getting ROI beads"
 awk -F["_:-"] '{print $1"\t"$3"\t"$4}' bead.ids | awk -F" " '{print $1"\t"$2"\t"$3}' > tmp
 paste tmp bead.ids > bead.bedfile
-bedtools shuffle -i $2 -g $Genome -seed 927442958 > ROI.bed
+bedtools shuffle -i $2 -g $Genome > ROI.bed
 bedtools intersect -a bead.bedfile -b ROI.bed -wa | awk -F"\t" '{print $4}' | sort | uniq > ROI
 
 Rscript automat_euclidian.R bead.ids ROI
