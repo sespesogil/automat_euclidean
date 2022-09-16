@@ -1,4 +1,6 @@
 #!/bin/bash
+# author= sergio.espeso-gil
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$DIR"
 cmm=$1
@@ -7,6 +9,7 @@ Genome=$4
 
 until [  $Nperm -lt 1 ]; do
 
+echo "Computing iteration number $Nperm"
 echo "Extracting bead.ids"
 grep beadID $cmm > beads
 awk -F' ' '{print $11"\t"$3"\t"$4"\t"$5}' beads | sed -e "s/[beadIDxyz=/>]\+//g" | sed 's/\"//g'  > bead.ids
