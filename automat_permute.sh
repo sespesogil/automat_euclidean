@@ -25,8 +25,8 @@ Rscript automat_euclidian.R bead.ids ROI
 
 mkdir output
 
-mv EucledeanPairWiseTable.txt output/EucledeanPairWiseTable.$Nperm.txt
-mv EucledeanPairWiseTable.txt output/EucledeanPairWiseTable.$Nperm.txt
+tail -n +2 EucledeanPairWiseTable.txt > output/EucledeanPairWiseTable.$Nperm.txt
+
 
 let Nperm-=1
 
