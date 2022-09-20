@@ -31,3 +31,7 @@ tail -n +2 EucledeanPairWiseTable.txt > output/EucledeanPairWiseTable.$Nperm.txt
 let Nperm-=1
 
 done
+
+cat *.txt > RandomizedMapping.txt
+
+
