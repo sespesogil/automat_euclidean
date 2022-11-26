@@ -1,5 +1,8 @@
 #!/bin/bash
 # author= sergio.espeso-gil
+# Allows to run a permutation analysis using Chrom3D models to infer the likelihood of finding euclidean distances of regions of interest versus randomness. 
+# Requires: 1) Chrom3D model (cmm format) , 2) Regions of interest (ROI) , 3) Number of iterations,  4) Chromosomes sizes
+# Example : sh automat_permute.sh yourmodel.cmm ROI.txt 100000 mm10.chrom.sizes
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$DIR"
@@ -23,15 +26,17 @@ bedtools intersect -a bead.bedfile -b ROI.bed -wa | awk -F"\t" '{print $4}' | so
 
 Rscript automat_euclidian.R bead.ids ROI
 
-mkdir output
+Filename="$(basename $2)"
+out=$(echo "$(basename $2)._automat_permute")
+mkdir $out
 
-tail -n +2 EucledeanPairWiseTable.txt > output/EucledeanPairWiseTable.$Nperm.txt
+tail -n +2 EucledeanPairWiseTable.txt > $out/EucledeanPairWiseTable.$Nperm.txt
 
 
 let Nperm-=1
 
 done
 
-cat *.txt > RandomizedMapping.txt
+cat $out/*.txt > $out/$Filename.RandomizedMapping.$Nperm.txt
 
 
