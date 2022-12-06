@@ -20,7 +20,7 @@ automat_euclidian.sh
 
 # Updates
 
-New functions to compare models have been incorporated. Also the possibility to run a permutation analysis based in a regions of interest (ROI) to be able to estimate the likelihood of finding the associated-ROI euclidean conformation by chance (both paired and unpaired tests). 
+New functions to compare 3D models have been incorporated. It is also now included the possibility to run a permutation analysis based in regions of interest (ROI), to determine the likelihood (probability) of finding that particular associated-ROI euclidean conformation versus randomness (both paired and unpaired tests). 
 
 
 
